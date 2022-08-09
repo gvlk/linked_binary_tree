@@ -1,7 +1,9 @@
-# Função para inserir que deve chamar uma função de busca
-# Função para buscar
-# Função para imprimir as informações dos nodos
-# com opção de escolher a categoria de caminhamento (central, pré-fixado, pós-fixado (esquerda e direita)
+# Guilherme Azambuja — 149 429
+# Função para inserir um nó na árvore
+# Função para remover um nó da árvore
+# Função para buscar nó
+# Função para imprimir as informações dos nós
+# Opção de escolher a categoria de caminhamento (central, pré-fixado, pós-fixado (esquerda e direita)
 # Código que testa as funcionalidades
 
 class No:
@@ -149,7 +151,7 @@ class ArvoreBinaria:
 
 		if self.raiz is None:
 			self.raiz = elemento
-			print(f"Elemento {elemento.info} adicionado")
+			print(f"Elemento '{elemento.info}' adicionado - raíz da árvore '{self.nome}'")
 
 		elif self.raiz is not None and info_antecessor is not None:
 			if direcao in self.direcoes:
@@ -158,13 +160,41 @@ class ArvoreBinaria:
 					espaco_alvo = getattr(elemento_antecessor, direcao)
 					if espaco_alvo is None:
 						setattr(elemento_antecessor, direcao, elemento)
-						print(f"Elemento {elemento.info} adicionado")
+						print(f"Elemento '{elemento.info}' adicionado - {self.nomedirecoes[direcao]} de '{info_antecessor}'")
 
 					else:
-						raise ValueError(f"Posição {self.nomedirecoes[direcao]} do nó '{info_antecessor} já ocupada'")
+						raise ValueError(f"Posição {self.nomedirecoes[direcao]} do nó '{info_antecessor}' já ocupada")
 				else:
 					raise ValueError(f"Nó '{info_antecessor}' não encontrado na árvore '{self.nome}'")
 			else:
 				raise ValueError(f"'{direcao}' é inválido. Parâmetro 'direcao' deve ser 'esq' ou 'dir'")
 		else:
 			raise ValueError("Parâmetro 'info_antecessor' é necessário")
+
+	def remover(self, info_apaga):
+
+		def achar_antecessor(aux):
+			if aux.esq is not None:
+				if aux.esq.info == info_apaga:
+					return aux, 'esq'
+			else:
+				return None
+
+			if aux.dir is not None:
+				if aux.dir.info == info_apaga:
+					return aux, 'dir'
+			else:
+				return None
+
+		param = {
+			'func': achar_antecessor,
+			'caminhamento': 'pr',
+			'direcao': 'esq'
+		}
+
+		no_antecessor = self.percorrer(**param)
+		if no_antecessor is not None:
+			setattr(no_antecessor[0], no_antecessor[1], None)
+			print(f"Elemento '{info_apaga}' removido")
+		else:
+			print(f"Nó '{info_apaga}' não encontrado na árvore '{self.nome}'")

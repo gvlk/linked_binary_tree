@@ -1,3 +1,5 @@
+# Guilherme Azambuja — 149 429
+
 import main
 
 arvore_teste = main.ArvoreBinaria('arvore_teste')
@@ -28,3 +30,8 @@ print('-'*80)
 # arvore_teste.inserir('P', 'M', 'esq')  # Exemplo de erro
 # arvore_teste.imprimir('pi', 'dir')     # Exemplo de erro
 # Caso parâmetros inválidos sejam passados às funções, erros vão notificar o problema.
+arvore_teste.remover('B')
+print('-'*80)
+arvore_teste.imprimir()
+print()
+print('-'*80)
