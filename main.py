@@ -197,4 +197,4 @@ class ArvoreBinaria:
 			setattr(no_antecessor[0], no_antecessor[1], None)
 			print(f"Elemento '{info_apaga}' removido")
 		else:
-			print(f"Nó '{info_apaga}' não encontrado na árvore '{self.nome}'")
+			raise ValueError(f"Nó '{info_apaga}' não encontrado na árvore '{self.nome}'")
